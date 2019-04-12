@@ -85,7 +85,7 @@ Partial Class Form1
         Me.Controls.Add(Me.TextBoxDest)
         Me.Controls.Add(Me.PanelFile)
         Me.Name = "Form1"
-        Me.Text = "Form1"
+        Me.Text = "ファイルをを移動するtool"
         Me.PanelFile.ResumeLayout(False)
         Me.PanelFile.PerformLayout()
         Me.ResumeLayout(False)
