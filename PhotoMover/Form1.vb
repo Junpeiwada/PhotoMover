@@ -19,13 +19,34 @@
 
         '// 遅ければここを非同期化すると速くなるかもしれんね
 
+
+        Dim preYear As String = Nothing
+        Dim hasMultiYear = False
+        For i = 0 To fileNameList.Count - 1
+            Dim file = fileNameList(i)
+            Dim writeDate = IO.File.GetLastWriteTime(file)
+
+            If preYear Is Nothing Then
+                preYear = writeDate.ToString("yyyy")
+            End If
+
+            If preYear = writeDate.ToString("yyyy") Then
+                hasMultiYear = True
+            End If
+        Next
+
+
         LabelStatus.Text = $"0/{fileNameList.Count}"
+
 
         For i = 0 To fileNameList.Count - 1
             Dim file = fileNameList(i)
             Dim writeDate = IO.File.GetLastWriteTime(file)
 
             Dim moveDirec = writeDate.ToString("MM-dd")
+            If hasMultiYear Then
+                moveDirec = writeDate.ToString("yyyy/MM-dd")
+            End If
 
             Dim destFilePath = IO.Path.Combine(destDirecPath, moveDirec, IO.Path.GetFileName(file))
             If IO.File.Exists(destFilePath) Then
